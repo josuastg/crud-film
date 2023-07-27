@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Param, Post, Body, ValidationPipe, Put } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, Post, Body, ValidationPipe, Put, Delete, HttpCode } from "@nestjs/common";
 import { Film } from "src/entities/film";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -39,5 +39,15 @@ export class FilmController {
             throw new NotFoundException('Film tidak ditemukan');
         }
         return this.repository.save({ ...film, ...payload });
+    }
+
+    @Delete('/delete/:id')
+    @HttpCode(204)
+    async remove(@Param('id') id) {
+        const film = await this.repository.findOneBy({ id });
+        if (!film) {
+            throw new NotFoundException();
+        }
+        await this.repository.remove(film);
     }
 }
