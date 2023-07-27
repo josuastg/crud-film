@@ -13,7 +13,7 @@ export class Film {
     genre: string;
 
     @Column()
-    duration: number;
+    duration: number; //minutes
 
     @Column()
     synopsis: string;
@@ -25,10 +25,10 @@ export class Film {
     writer: string;
 
     @Column()
-    film_img: string;
+    film_img: string; //link to image
 
     @Column()
-    trailer: string;
+    trailer: string; //link to trailer
 
     @Column()
     language: string;

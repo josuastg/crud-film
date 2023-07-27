@@ -46,7 +46,7 @@ export class FilmController {
     async remove(@Param('id') id) {
         const film = await this.repository.findOneBy({ id });
         if (!film) {
-            throw new NotFoundException();
+            throw new NotFoundException('Film tidak ditemukan');
         }
         await this.repository.remove(film);
     }
